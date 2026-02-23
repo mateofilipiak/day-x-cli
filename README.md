@@ -17,6 +17,7 @@ Simple habit tracking CLI application written in Python.
 ## Purpose
 Backend learning project focused on logic, state handling and version control practice.
 
-## Run project
+```Markdown
+## How to run
 ```bash
 python main.py
