@@ -18,5 +18,5 @@ Simple habit tracking CLI application written in Python.
 Backend learning project focused on logic, state handling and version control practice.
 
 ## Run project
-'''bash
+```bash
 python main.py
