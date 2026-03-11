@@ -1,21 +1,5 @@
-import json
-import os
+from storage import load_data, save_data
 from datetime import date, datetime
-
-DATA_FILE = "data.json"
-
-
-def load_data():
-    if not os.path.exists(DATA_FILE):
-        return None
-    with open(DATA_FILE, "r") as file:
-        return json.load(file)
-
-
-def save_data(data):
-    with open(DATA_FILE, "w") as file:
-        json.dump(data, file, indent=4)
-        print("📁 Data saved to:", os.path.abspath("data.json"))
 
 
 def onboarding():
@@ -145,6 +129,18 @@ def check_achievements(data):
     save_data(data)
 
 
+def show_journal(data):
+    journal = data.get("daily_journal", [])
+    if not journal:
+        print("No journal entries yet. ")
+        return
+
+    print("\n📓 Journal entries:")
+
+    for entry in journal:
+        print(f"{entry['date']} ⭐{entry['rating']} - {entry['note']}")
+
+
 def handle_new_day(data):
     last_date = datetime.fromisoformat(data["last_active"]).date()
     today = date.today()
@@ -176,8 +172,9 @@ def menu(data):
         print("3. Show profile")
         print("4. Edit profile")
         print("5. Exit")
+        print("6. Show journal")
 
-        choice = input("Choose an option: ")
+        choice = input("Choose an option: ").strip()
 
         if choice == "1":
             start_day(data)
@@ -188,8 +185,12 @@ def menu(data):
         elif choice == "4":
             edit_profile(data)
         elif choice == "5":
+             show_journal(data)
+        elif choice == "6":
             print("See you tomorrow! 🚀")
             break
+        else:
+            print("Invalid choice, please try again.")  
 
 
 data = load_data()
