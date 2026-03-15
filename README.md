@@ -6,7 +6,7 @@ Simple habit tracking CLI application written in Python.
 - Start new day
 - Track progress
 - Profile system
-- JSON persistence
+- JSON data persistence
 - Anti-cheat mechanism (prevents fake day increments)
 
 ## Tech stack
@@ -15,8 +15,10 @@ Simple habit tracking CLI application written in Python.
 - Git
 
 ## Purpose
-Backend learning project focused on logic, state handling and version control practice.
+Learning backend fundamentals: application logic, state handling and version control.
 
 ## How to run
-```bash
+
+Run the application from the project folder:
+
 python main.py
