@@ -1,6 +1,8 @@
 from storage import load_data, save_data
 from datetime import date, datetime
 from menu import menu
+from achievements import check_achievements
+from day_manager import handle_new_day
 
 
 def onboarding():
@@ -109,27 +111,6 @@ def edit_profile(data):
     print("Profile updated! ✔")
 
 
-def check_achievements(data):
-    day_count = data.get("day_count", 0)
-    achievements = data.get("achievements", [])
-
-    achievement_rules = [
-        (1, "Day One Warrior"),
-        (7, "Warrior Novice"),
-        (14, "Consistency Knight"),
-        (30, "One-Month Champion"),
-        (100, "Unbreakable Legend")
-    ]
-
-    for required_days, title in achievement_rules:
-        if day_count >= required_days and title not in achievements:
-            achievements.append(title)
-            print(f"🏆 New Achievement: {title}! ⚔️")
-
-    data["achievements"] = achievements
-    save_data(data)
-
-
 def show_journal(data):
     journal = data.get("daily_journal", [])
     if not journal:
@@ -140,30 +121,6 @@ def show_journal(data):
 
     for entry in journal:
         print(f"{entry['date']} ⭐{entry['rating']} - {entry['note']}")
-
-
-def handle_new_day(data):
-    last_date = datetime.fromisoformat(data["last_active"]).date()
-    today = date.today()
-
-    if today > last_date:
-        day_gap = (today - last_date).days
-
-        if day_gap == 1:
-            data["day_count"] += 1
-            print(f"🔥 New day! Day {data['day_count']} activated! 💪")
-        else:
-            data["day_count"] = 1
-            print("⏱ Long break detected - restarting from Day 1!🔄")
-
-        data["last_active"] = str(today)
-        save_data(data)
-        check_achievements(data)
-
-    elif today == last_date:
-        print("You've already activated today! 👍")
-
-    return data
 
 
 data = load_data()
