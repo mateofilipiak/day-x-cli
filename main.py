@@ -1,59 +1,7 @@
 from storage import load_data, save_data
-from datetime import date, datetime
 from menu import menu
-from achievements import check_achievements
-from day_manager import handle_new_day
-
-
-def onboarding():
-    print("\n👋 Welcome to Day X Coding!")
-    
-    name = input("How should I call you? ")
-    goal = input("What's your main goal? 🎯 ")
-    
-    data = {
-        "name": name,
-        "goal": goal,
-        "day_count": 1,
-        "last_active": str(date.today()),
-        "profile": {
-            "birthdate": None,
-            "height": None,
-            "weight": None
-        },
-        "reflections": []
-    }
-    
-    save_data(data)
-    print(f"Nice to meet you, {name}! 🚀 Day X begins now!")
-    return data
-
-
-def start_day(data):
-    print(f"\n🔥 Day {data['day_count']} in progress! Keep going {data['name']}! ✨")
-
-    while True:
-        rating_input = input("How was your day? Rate 1-5 ⭐: ").strip()
-        
-        if rating_input.isdigit() and 1 <= int(rating_input) <= 5:
-            rating = int(rating_input)
-            break
-        else:
-            print("Please enter a number between 1 and 5.")
-
-    reflect = input("Short note about today? ✍️ ")
-
-    if "daily_journal" not in data:
-        data["daily_journal"] = []
-
-    data["daily_journal"].append({
-        "date": str(date.today()),
-        "rating": rating,
-        "note": reflect
-    })
-
-    save_data(data)
-    print("Day saved with reflection! 🧠✨")
+from day_manager import handle_new_day, start_day
+from onboarding import onboarding
 
 
 def show_progress(data):
