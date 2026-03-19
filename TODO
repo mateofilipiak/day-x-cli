@@ -1,9 +1,19 @@
-przenieść show_profile → profile_manager.py
+przenieść show_profile → profile_manager.py #ZROBIONE
 
-przenieść show_journal → reflections.py
+przenieść show_journal → reflections.py #ZROBIONE
 
-dodać longest streak
+dodać longest streak #DODANE
 
 dodać delete/reset account
 
 zacząć projektować freeze streak
+
+przenieść rate ur day z start day do end day
+
+walidacja inputów(waga, wzrost, data)
+
+ujednolicić stat/data naming
+
+zapis do JSON
+
+połaczenie journal = end_day

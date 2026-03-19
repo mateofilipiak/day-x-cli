@@ -1,6 +1,6 @@
 from storage import load_data, save_data
 from menu import menu
-from day_manager import handle_new_day, start_day
+from day_manager import handle_new_day, start_day, end_day
 from onboarding import onboarding
 from profile_manager import show_profile
 from reflections import show_journal
@@ -63,5 +63,6 @@ menu(
     show_progress,
     edit_profile,
     show_profile,
-    show_journal
+    show_journal,
+    end_day
 )

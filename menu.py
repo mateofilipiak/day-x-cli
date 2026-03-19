@@ -1,11 +1,12 @@
-def menu(data, start_day, show_progress, show_profile, edit_profile, show_journal):
+def menu(data, start_day, show_progress, show_profile, edit_profile, show_journal, end_day):
     while True:
         print("\n1. Start day")
         print("2. Show progress")
         print("3. Show profile")
         print("4. Edit profile")
         print("5. Show journal")
-        print("6. Exit")
+        print("6. End day")
+        print("7. Exit")
 
         choice = input("Choose an option: ").strip()
 
@@ -20,6 +21,8 @@ def menu(data, start_day, show_progress, show_profile, edit_profile, show_journa
         elif choice == "5":
             show_journal(data)
         elif choice == "6":
+            end_day(data)
+        elif choice == "7":
             print("See you tomorrow! 🚀")
             break
         else:

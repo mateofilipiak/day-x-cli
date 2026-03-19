@@ -52,3 +52,26 @@ def handle_new_day(data):
         print("You've already activated today! 👍")
 
     return data
+
+
+def end_day(state):
+    if "current_streak" not in state:
+        state["current_streak"] = 0
+    if "longest_streak" not in state:
+        state["longest_streak"] = 0
+
+    state["current_streak"] += 1
+
+    if state["current_streak"] > state["longest_streak"]:
+        state["longest_streak"] = state["current_streak"]
+
+    note = input("How was your day? Any reflections? ✍️ ")
+    state["last_note"] = note
+    rating = int(input("Rate your day (1-5): "))
+    state["last_rating"] = rating
+    try:
+        rating = int(input("Rate your day (1-5): "))
+    except ValueError:
+        rating = 0
+    print(f"🔥 Current streak: {state['current_streak']}")
+    print(f"🏆 Longest streak: {state['longest_streak']}")
