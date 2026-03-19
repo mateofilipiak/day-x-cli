@@ -1,0 +1,9 @@
+przenieść show_profile → profile_manager.py
+
+przenieść show_journal → reflections.py
+
+dodać longest streak
+
+dodać delete/reset account
+
+zacząć projektować freeze streak

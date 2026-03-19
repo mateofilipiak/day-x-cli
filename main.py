@@ -2,6 +2,8 @@ from storage import load_data, save_data
 from menu import menu
 from day_manager import handle_new_day, start_day
 from onboarding import onboarding
+from profile_manager import show_profile
+from reflections import show_journal
 
 
 def show_progress(data):
@@ -18,24 +20,10 @@ def show_progress(data):
             print(" -", a)
 
 
-def show_profile(data):
-    profile = data.get("profile", {})
-    print("\n👤 Profile:")
-    print(f"Name: {data['name']}")
-
-    if profile:
-        print(f"Birthdate: {profile.get('birthdate', '-')}")
-        print(f"Height: {profile.get('height', '-')} cm")
-        print(f"Weight: {profile.get('weight', '-')} kg")
-    else:
-        print("No profile data yet.")
-
-
 def edit_profile(data):
     print("\n📝 Edit Profile")
 
     profile = data.get("profile", {})
-
     old_birthdate = profile.get("birthdate", "")
     old_height = profile.get("height", "")
     old_weight = profile.get("weight", "")
@@ -59,18 +47,6 @@ def edit_profile(data):
     print("Profile updated! ✔")
 
 
-def show_journal(data):
-    journal = data.get("daily_journal", [])
-    if not journal:
-        print("No journal entries yet. ")
-        return
-
-    print("\n📓 Journal entries:")
-
-    for entry in journal:
-        print(f"{entry['date']} ⭐{entry['rating']} - {entry['note']}")
-
-
 data = load_data()
 
 if data is None:
@@ -85,7 +61,7 @@ menu(
     data,
     start_day,
     show_progress,
-    show_profile,
     edit_profile,
+    show_profile,
     show_journal
 )
