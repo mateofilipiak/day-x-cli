@@ -5,29 +5,7 @@ from achievements import check_achievements
 
 def start_day(data):
     print(f"\n🔥 Day {data['day_count']} in progress! Keep going {data['name']}! ✨")
-
-    while True:
-        rating_input = input("How was your day? Rate 1-5 ⭐: ").strip()
-        
-        if rating_input.isdigit() and 1 <= int(rating_input) <= 5:
-            rating = int(rating_input)
-            break
-        else:
-            print("Please enter a number between 1 and 5.")
-
-    reflect = input("Short note about today? ✍️ ")
-
-    if "daily_journal" not in data:
-        data["daily_journal"] = []
-
-    data["daily_journal"].append({
-        "date": str(date.today()),
-        "rating": rating,
-        "note": reflect
-    })
-
-    save_data(data)
-    print("Day saved with reflection! 🧠✨")
+    data["day_started"] = True
 
 
 def handle_new_day(data):
@@ -54,24 +32,45 @@ def handle_new_day(data):
     return data
 
 
-def end_day(state):
-    if "current_streak" not in state:
-        state["current_streak"] = 0
-    if "longest_streak" not in state:
-        state["longest_streak"] = 0
+def end_day(data):
+    if not data.get("day_started"):
+        print("⚠️ You need to start your day first.")
+        return
+    
+    if "current_streak" not in data:
+        data["current_streak"] = 0
+    if "longest_streak" not in data:
+        data["longest_streak"] = 0
 
-    state["current_streak"] += 1
+    data["current_streak"] += 1
 
-    if state["current_streak"] > state["longest_streak"]:
-        state["longest_streak"] = state["current_streak"]
+    if data["current_streak"] > data["longest_streak"]:
+        data["longest_streak"] = data["current_streak"]
 
-    note = input("How was your day? Any reflections? ✍️ ")
-    state["last_note"] = note
-    rating = int(input("Rate your day (1-5): "))
-    state["last_rating"] = rating
-    try:
-        rating = int(input("Rate your day (1-5): "))
-    except ValueError:
-        rating = 0
-    print(f"🔥 Current streak: {state['current_streak']}")
-    print(f"🏆 Longest streak: {state['longest_streak']}")
+    while True:
+        rating_input = input("Rate your day (1-5): ").strip()
+        if rating_input.isdigit() and 1 <= int(rating_input) <= 5:
+            rating = int(rating_input)
+            break
+        else:
+            print("Please enter a number between 1 and 5.")
+
+        note = input("How was your day? Any reflectionS? ✍️ (optional): ").strip()
+
+        if "daily_journal" not in data:
+            data["daily_journal"] = []
+
+        data["daily_journal"].append({
+            "date": str(date.today()),
+            "rating": rating,
+            "note": note
+        })
+
+        save_data(data)
+
+        data["day_started"] = False
+
+        print("🔥 Current streak: {data['current_streak']}")
+        print("🏆 Longest streak: {data['longest_streak']}")
+        print("✅ Day saved! See you tomorrow! 👋")
+

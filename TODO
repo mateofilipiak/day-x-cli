@@ -1,19 +1,15 @@
-przenieść show_profile → profile_manager.py #ZROBIONE
-
-przenieść show_journal → reflections.py #ZROBIONE
-
-dodać longest streak #DODANE
-
-dodać delete/reset account
+dodać delete/reset account ( to dopiero na końcu, by niczego nie popsuć :D )
 
 zacząć projektować freeze streak
 
-przenieść rate ur day z start day do end day
-
 walidacja inputów(waga, wzrost, data)
 
-ujednolicić stat/data naming
+zapis do JSON (add _reflection, ale zrobić to w sekscji manage habits or smg)
 
-zapis do JSON
+żeby projekt był gotowy na rekrutacje, musi być porządek w json ale i w plikach i funkcjach
 
-połaczenie journal = end_day
+mój doradca nie chce bym rozwijał projekt na chama teraz tzw dodawania userów, bazy danych itd
+
+w sekcji habits powinny być elementy gdzie użytkownik wpisuje taski do zrobienia i ilośc czasu oraz dzienne przypomnienie - odhacza zrobienie, dostaje pochwałe, nie przewidze wszystkich nawyków ani czynności dlatego to też miejsce na zbieranie danych ale bezpiecznie, niech sie uzytkownik nie boi
+
+dla jednych narzędzie do budowania nawyków dla innych ładna przypominajka, np że po karty pokemon muszą isc czy cos xd
