@@ -1,3 +1,4 @@
+from habits import add_habit, show_habits
 from storage import load_data, save_data
 from menu import menu
 from day_manager import handle_new_day, start_day, end_day
@@ -37,5 +38,7 @@ menu(
     show_profile,
     edit_profile,
     show_journal,
+    add_habit,
+    show_habits,
     end_day
 )
