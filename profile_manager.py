@@ -1,7 +1,7 @@
 import json
 import os
-
 from storage import save_data
+from datetime import datetime
 
 
 def show_profile(data):
@@ -25,15 +25,62 @@ def edit_profile(data):
     old_weight = profile.get("weight", "")
     old_reason = data.get("reason", "")
 
-    birthdate = input(f"Birthdate (YYYY-MM-DD) [{old_birthdate}]: ")
-    height = input(f"Height in cm [{old_height}]: ")
-    weight = input(f"Weight in kg [{old_weight}]: ")
+    while True:
+        birthdate = input(f"Birthdate YYYY-MM-DD [{old_birthdate}]: ").strip()
+
+        if not birthdate:
+            birthdate = old_birthdate
+            break
+
+        try:
+            birthdate_obj = datetime.strptime(birthdate, "%Y-%m-%d")
+
+            if birthdate_obj > datetime.now():
+                print("Birthdate cannot be in the future.")
+                continue
+
+            break
+        except ValueError:
+            print("Invalid date format. Please use YYYY-MM-DD.")
+
+        break
+
+    while True:
+        height = input(f"Height in cm [{old_height}]: ").strip()
+        
+        if not height:
+            height = old_height
+            break
+
+        if height.isdigit() and 100 <= int(height) <= 250:
+            height = int(height)
+            break
+
+        print("Please enter a valid height between 100 and 250 cm.")
+
+    while True:
+        weight = input(f"Weight in kg [{old_weight}]: ").strip()
+        
+        if not weight:
+            weight = old_weight
+            break
+
+        try:
+            w = float(weight)
+            if 30 <= w <= 300:
+                weight = w
+                break
+            else:
+                print("Please enter a valid weight between 30 and 300 kg.")
+        except ValueError:
+            print("Please enter a valid number for weight.")
+          
     reason = input(f"Why do you want to improve yourself? 💭 [{old_reason}]: ")
 
     data["profile"] = {
-        "birthdate": birthdate if birthdate else old_birthdate,
-        "height": int(height) if height.isdigit() else old_height,
-        "weight": int(weight) if weight.isdigit() else old_weight,
+        "birthdate": birthdate,
+        "height": height,
+        "weight": weight,
     }
 
     if reason:

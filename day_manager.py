@@ -16,7 +16,7 @@ def handle_new_day(data):
         day_gap = (today - last_date).days
 
         for habit in data.get("habits", []):
-        habit["done"] = False
+            habit["done"] = False
 
         if day_gap == 1:
             data["day_count"] += 1
